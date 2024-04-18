@@ -1,0 +1,161 @@
+{{!-- [12:53 am, 18/4/2024] Prakash I:
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Medicine</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Add Medicine</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="/addMedicine" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="number" class="form-control" id="price" name="price" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expiredDate">Expired Date:</label>
+                        <input type="date" class="form-control" id="expiredDate" name="expiredDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stockAvailable">Stock Available:</label>
+                        <input type="number" class="form-control" id="stockAvailable" name="stockAvailable" min="0"
+                            required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Medicine</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+[1:06 am, 18/4/2024] Prakash I:
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Medicine List</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="medicineTableBody">
+                    <!-- Example rows -->
+                    <tr>
+                        <td>Panadol</td>
+                        <td>For fever and pain relief</td>
+                        <td>$5.99</td>
+                        <td>
+                            <input type="number" class="form-control" id="quantity_panadol" name="quantity_panadol"
+                                min="1" value="1">
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-purchase" data-medicine="Panadol">Purchase</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Amoxicillin</td>
+                        <td>Antibiotic</td>
+                        <td>$10.50</td>
+                        <td>
+                            <input type="number" class="form-control" id="quantity_amoxicillin"
+                                name="quantity_amoxicillin" min="1" value="1">
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-purchase" data-medicine="Amoxicillin">Purchase</button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows dynamically if needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="purchaseModalLabel">Purchase Medicine</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="purchaseForm">
+                        <div class="form-group">
+                            <label for="customerName">Customer Name:</label>
+                            <input type="text" class="form-control" id="customerName" name="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="totalPrice">Total Price:</label>
+                            <input type="text" class="form-control" id="totalPrice" name="totalPrice" readonly>
+                        </div>
+                        <input type="hidden" id="medicineName" name="medicineName">
+                        <input type="hidden" id="medicinePrice" name="medicinePrice">
+                        <input type="hidden" id="medicineQuantity" name="medicineQuantity">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="purchaseForm">Confirm Purchase</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Medicine Form Modal -->
+    <div class="modal fade" id="addMedicineModal" tabindex="-1" aria-labelledby="addMedicineModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMedicineModalLabel">Add Medicine</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addMedicineForm">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"
+                                required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price" min="0" step="0.01"> --}}

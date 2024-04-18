@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <!--[if lt IE 9]>
+		<script src="/assets/js/html5shiv.min.js"></script>
+		<script src="/assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+
+    {{>header}}
+    {{>sidebar}}
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-7 col-6">
+                    <h4 class="page-title">My Profile</h4>
+                </div>
+
+                <div class="col-sm-5 col-6 text-right m-b-30">
+
+                </div>
+            </div>
+            <div class="card-box profile-header">
+                <div class="row">
+                    <% for (var i=0; i < list.length; i++){ %>
+                        <form action="" method="post">
+
+                            <div class="form-group">
+                                <label for="">Username</label>
+                                <input class="form-control" type="text" name="username" value="<%= list[i].username%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input class="form-control" type="email" name="email" value="<%= list[i].email%>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">password</label>
+                                <input class="form-control" type="text" name="password">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">New Password</label>
+                                <input class="form-control" type="text" name="new_password">
+                            </div>
+
+                            <button class="btn btn-primary btn-rounded">Edit Profile</button>
+                            <% } %>
+                        </form>
+
+                </div>
+            </div>
+
+     
+    <div class="sidebar-overlay" data-reff=""></div>
+    <script src="/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <script src="/assets/js/app.js"></script>
+</body>
+
+
+<!-- profile23:03-->
+
+</html>
